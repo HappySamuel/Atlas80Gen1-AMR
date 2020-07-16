@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<launch>
+    <arg name="odom_topic" default="odometry/filtered_on_map"/> <!--"pf/pose/odom"-->
+
+    <node pkg="heading_turner" type="heading_turner.py" name="heading_turner">
+        <param name="init_turn_topic" value="turning/init"/>
+        <param name="drive_topic" value="high_level/twist_cmd_mux/input/nav_2"/>
+        <param name="odom_topic" value="$(arg odom_topic)"/>
+        <param name="finish_turn_topic" value="turning/status"/>
+    </node>
+</launch>

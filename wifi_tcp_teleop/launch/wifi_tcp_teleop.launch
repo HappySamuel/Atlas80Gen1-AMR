@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<launch>
+    <node pkg="wifi_tcp_teleop" type="wifi_tcp_teleop.py" name="wifi_tcp_teleop">
+        <param name="teleop_topic" value="low_level/twist_cmd_mux/input/teleop"/>
+        <param name="ip_address" value="192.168.1.111"/>
+        <param name="port" value="5005"/>
+    </node>
+</launch>

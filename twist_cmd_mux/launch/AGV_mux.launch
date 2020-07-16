@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+  Twist Command Multiplexer launcher
+  -->
+
+<launch>
+
+    <!-- Chain the MUXs between "high-level output" and "low-level navigation input" -->
+    <node pkg="topic_tools" type="relay" name="mux_chainer" args="/high_level/twist_cmd_mux/output /low_level/twist_cmd_mux/input/navigation"/>
+
+    <!-- default (zero) twist command for high level MUX -->
+    <node pkg="rostopic" type="rostopic" name="zero_twist_cmd" args="pub -r 6 /high_level/twist_cmd_mux/input/default geometry_msgs/Twist '{linear: {x: 0.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}'"/>
+
+    <!-- High Level MUX -->
+    <include file="$(find twist_cmd_mux)/launch/standalone.launch" ns="high_level">
+	<arg name="nodelet_manager_name" value="twist_cmd_mux_nodelet_manager"/>
+	<arg name="config_file" value="$(find twist_cmd_mux)/param/high_level_mux.yaml"/>
+    </include>
+
+    <!-- Low Level MUX -->
+    <include file="$(find twist_cmd_mux)/launch/standalone.launch" ns="low_level">
+	<arg name="nodelet_manager_name" value="twist_cmd_mux_nodelet_manager"/>
+	<arg name="config_file" value="$(find twist_cmd_mux)/param/low_level_mux.yaml"/>
+    </include>
+
+</launch>

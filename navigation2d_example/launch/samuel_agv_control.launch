@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<launch>
+
+    <node pkg="rosserial_python" type="serial_node.py" name="agv_control">
+	<param name="port" value="/dev/rfcomm1"/>
+	<param name="baud" value="9600"/>
+    </node>
+
+</launch>

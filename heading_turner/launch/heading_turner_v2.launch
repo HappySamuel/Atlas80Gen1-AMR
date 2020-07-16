@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<launch>
+    <arg name="odom_topic" default="pf/pose/odom"/>
+    <arg name="amcl_topic" default="amcl_pose"/>
+
+    <node pkg="heading_turner" type="heading_turner_v2.py" name="heading_turner_v2">
+        <param name="init_turn_topic" value="turning/init"/>
+        <param name="drive_topic" value="high_level/twist_cmd_mux/input/nav_2"/>
+        <param name="odom_topic" value="$(arg odom_topic)"/>
+        <param name="amcl_topic" value="$(arg amcl_topic)"/>
+        <param name="finish_turn_topic" value="turning/status"/>
+    </node>
+</launch>

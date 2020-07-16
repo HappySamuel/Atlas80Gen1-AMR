@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<launch>
+    <node pkg="suspend_resume" type="suspend_resume.py" name="suspend_resume">
+        <param name="web_pub_topic" value="suspend/output"/>
+        <param name="suspend_status_topic" value="suspend/status"/>
+        <param name="drive_topic" value="low_level/twist_cmd_mux/input/suspend_resume"/>
+    </node>
+</launch>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<launch>
+    <!-- IMU Driver -->
+    <node pkg="imu_3dm_gx3" type="imu_3dm_gx3" name="imu" output="screen">
+        <param name="port" value="/dev/microstrain-imu"/>
+        <param name="frame_id" value="imu"/>
+    </node>
+
+    <!-- IMU Odometry -->
+    <node pkg="dead_reckoning" type="psa_odom_imu" name="encoder_imu">
+        <param name="parent_frame_id" value="odom"/>
+        <param name="child_frame_id" value="base_link"/>
+    </node>
+
+    <!-- IMU tf Broadcaster-->
+    <group ns="Coordinate_TF">
+        <node pkg="atlas80" type="static_transform_pub_param" name="base_link_to_imu">
+            <param name="parent_frame_id" value="base_link"/>
+            <param name="child_frame_id" value="imu"/>
+            <param name="x" value="-0.05"/>
+            <param name="y" value="0.13"/>
+            <param name="z" value="0.39"/>
+            <param name="yaw" value="0"/>
+            <param name="pitch" value="0"/>
+            <param name="roll" value="0"/>
+        </node>
+    </group>
+</launch>

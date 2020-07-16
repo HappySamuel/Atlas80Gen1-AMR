@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<launch>
+    <node pkg="atlas80" type="due_serial.py" name="due_serial" output="screen">
+        <param name="notify_topic" value="notify"/>
+        <param name="twist_topic" value="cmd_vel"/>
+        <param name="lift_cmd_topic" value="lifter/init"/>
+        <param name="contactor_topic" value="self_charging/contactor"/>
+        <param name="web_suspend_topic" value="suspend/input/web"/>
+        <param name="navi_suspend_topic" value="suspend/input/navi"/>
+        <param name="voltage_topic" value="battery/voltage"/>
+        <param name="lift_status_topic" value="lifter/status"/>
+        <param name="suspend_status_topic" value="suspend/status"/>
+        <param name="wheel_odom_topic" value="motor/raw_odom"/>
+        <param name="encoder_topic" value="motor/encoder"/>
+        <param name="magnetic_topic" value="magnetic"/>
+        <param name="scale_xspeed" value="1.0"/>
+        <param name="scale_rotspeed" value="0.505"/> <!-- 0.505 -->
+    </node>
+</launch>

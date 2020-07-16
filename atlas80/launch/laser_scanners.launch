@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+
+<launch>
+    <arg name="front_laser" default="true"/>
+    <arg name="rear_laser" default="true"/>
+
+    <!-- ~~~~~~~~~~ Front LIDAR ~~~~~~~~~~ -->
+    <group if="$(arg front_laser)" ns="lidars/front_lidar">
+        <!-- R2000 Driver -->
+        <node pkg="pepperl_fuchs_r2000" type="r2000_node" name="r2000_node" respawn="true">
+	    <param name="scanner_ip" value="192.168.1.11"/> <!-- 110.0.10.9 -->
+            <param name="frame_id" value="/front_lidar"/>
+            <param name="scan_frequency" value="30"/>
+            <param name="samples_per_scan" value="2800"/>
+            <remap from="r2000_node/scan" to="scan"/>
+        </node>
+
+        <node pkg="laser_maxrange_republish" type="fov_narrower" name="fov_narrower">
+            <param name="ang_min" value="-135"/>
+            <param name="ang_max" value="135"/>
+            <param name="intensity" value="false"/>
+        </node>
+    </group>
+
+    <!-- ~~~~~~~~~~ Rear LIDAR ~~~~~~~~~~ -->
+    <group if="$(arg rear_laser)" ns="lidars/rear_lidar">
+        <!-- Hokuyo URG04-LX Driver -->
+<!--        <node pkg="urg_node" type="urg_node" name="hokuyo_node">
+            <param name="serial_port" value="/dev/hokuyo_04lx"/>
+            <param name="serial_baud" value="115200"/>
+            <param name="frame_id" value="/rear_lidar"/>
+            <param name="publish_intensity" value="false"/>
+            <param name="angle_min" value="-2.0943951"/>
+            <param name="angle_max" value="2.0943951"/>
+        </node>
+-->
+        <!-- R2000 Driver -->
+<!--        <node pkg="pepperl_fuchs_r2000" type="r2000_node" name="r2000_node">
+	    <param name="scanner_ip" value="192.168.1.10"/>
+            <param name="frame_id" value="/rear_lidar"/>
+            <param name="scan_frequency" value="30"/>
+            <param name="samples_per_scan" value="2800"/>
+            <remap from="r2000_node/scan" to="scan"/>
+        </node>
+
+        <node pkg="laser_maxrange_republish" type="fov_narrower" name="fov_narrower" output="screen">
+            <param name="ang_min" value="-120"/>
+            <param name="ang_max" value="120"/>
+            <param name="intensity" value="false"/>
+        </node>
+-->
+        <!-- YDLidar G4 Driver -->
+        <node pkg="ydlidar"  type="ydlidar_node" name="ydlidar_node">
+            <param name="port"         type="string" value="/dev/ydlidar_g4"/>  
+            <param name="baudrate"     type="int"    value="115200"/>
+            <param name="frame_id"     type="string" value="/rear_lidar"/>
+            <param name="angle_fixed"  type="bool"   value="true"/>
+            <param name="low_exposure"  type="bool"   value="false"/>
+            <param name="heartbeat"    type="bool"   value="false"/>
+            <param name="resolution_fixed"    type="bool"   value="true"/>
+            <param name="angle_min"    type="double" value="-180" />
+            <param name="angle_max"    type="double" value="180" />
+            <param name="range_min"    type="double" value="0.08" />
+            <param name="range_max"    type="double" value="16.0" />
+            <param name="ignore_array" type="string" value="" />
+            <param name="samp_rate"    type="int"    value="9"/>
+            <param name="frequency"    type="double" value="12"/>
+        </node>
+
+        <node pkg="laser_maxrange_republish" type="fov_narrower" name="fov_narrower">
+            <param name="ang_min" value="-120"/>
+            <param name="ang_max" value="145"/> <!-- more than right side, due to place a bit incline to right -->
+            <param name="intensity" value="false"/>
+        </node>
+
+    </group>
+
+    <group ns="lidars">
+        <include file="$(find ira_laser_tools)/launch/atlas80_laserscan_multi_merger.launch"/>
+    </group>
+</launch>

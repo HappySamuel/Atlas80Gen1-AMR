@@ -1,0 +1,28 @@
+
+#--- car footprint (meter) ---
+footprint: [ [-0.5, -0.3], [0.5, -0.3], [0.5, 0.3], [-0.5, 0.3] ]
+
+#--- max allowable latency, navigation stops the robot if tf tree not updated at this rate (sec) ---
+transform_tolerance: 0.25
+map_type: costmap
+
+#--- Layers that will be used for path planning by navigation ---
+obstacle_layer:
+    enabled: true
+    obstacle_range: 10.0
+    raytrace_range: 10.5
+    inflation_radius: 0.8
+    track_unknown_space: true
+    combination_method: 1
+
+    observation_sources: laser_scan_sensor
+    laser_scan_sensor: {sensor_frame: laser, data_type: LaserScan, topic: scan, marking: true, clearing: true}
+
+inflation_layer:
+    enabled: true
+    cost_scaling_factor: 8.0  # exponential rate at which the obstacle cost drops off
+    inflation_radius: 0.8  # max distance from an obstacle at which costs are incurred for path planning.
+
+static_layer:
+    enabled: true
+    map_topic: "/map"

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<launch>
+    <arg name="map" default="$(find atlas80)/maps/psa_warehouse_combined_18Sep.yaml"/>
+    <arg name="trajectory" default="$(find pure_pursuit_navigation)/trajectories/psa/psa_home_1.traj"/>
+
+    <node pkg="variable_speed_pure_pursuit" type="trajectory_with_speed_loader.py" name="speed_profile_trajectory" output="screen">
+        <param name="min_speed" value="0.3"/>
+        <param name="max_speed" value="1.0"/>
+        <param name="max_acceleration" value="1.0"/>
+        <param name="max_decceleration" value="-1.0"/>
+        <param name="pub_topic" value="/trajectory/current"/>
+        <param name="sub_topic" value="/trajectory/new"/>
+    </node>
+
+    <node pkg="pure_pursuit_navigation" type="psa_trajectory_tester.py" name="psa_trajectory_tester"/>
+
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find atlas80)/rviz/log_replay.rviz"/>
+
+    <node pkg="map_server" name="map_server" type="map_server" args="$(arg map)" />
+</launch>

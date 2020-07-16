@@ -1,0 +1,7 @@
+# Set the udev rule, make the device_port be fixed by Arduino DUE
+
+SUBSYSTEMS=="usb", KERNEL=="tty*", ACTION=="add", ATTRS{idVendor}=="2341", ATTRS{idProduct}=="003e", MODE="666", GROUP="dialout", SYMLINK+="arduino_due"
+
+SUBSYSTEMS=="usb", KERNEL=="tty*", ACTION=="add", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6015", MODE="666", GROUP="dialout", SYMLINK+="arduino_due"
+
+SUBSYSTEMS=="usb", KERNEL=="tty*", ACTION=="add", ATTRS{idVendor}=="2341", ATTRS{idProduct}=="003d", MODE="666", GROUP="dialout", SYMLINK+="arduino_due"

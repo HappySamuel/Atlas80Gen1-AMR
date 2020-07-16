@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<launch>
+    <node pkg="magnetic_follower" type="magnetic_follower_v1_5.py" name="magnetic_follower_v1_5" output="screen">
+        <param name="init_mag_topic" value="mag_navi/init"/>
+        <param name="notify_topic" value="notify"/>
+        <param name="mag_topic" value="magnetic"/>
+        <param name="mag_drive_topic" value="high_level/twist_cmd_mux/input/nav_1"/>
+        <param name="init_90_turn_topic" value="turning_90/init"/>
+        <param name="finsih_90_turn_topic" value="turning_90/status"/>
+        <param name="relocalize_topic" value="initialpose"/>
+        <param name="finish_mag_topic" value="mag_navi/status"/>
+        <param name="pose_topic" value="/pf/pose/odom"/>
+        <param name="pt_4_x" value="49.5"/>
+        <param name="pt_4_y" value="-31.5"/>
+        <param name="pt_4_heading" value="-90"/>
+        <param name="pt_5_x" value="55.4"/>
+        <param name="pt_5_y" value="-31.5"/>
+        <param name="pt_5_heading" value="-90"/>
+        <param name="out_pt_x" value="36.4"/>
+        <param name="out_pt_y" value="-30.5"/>
+        <param name="out_pt_heading" value="-179"/>
+        <param name="exit_pt_x" value="5.7"/>
+        <param name="exit_pt_y" value="8.6"/>
+        <param name="exit_pt_heading" value="0"/>
+    </node>
+</launch>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<launch>
+    <arg name="odom_topic" default="odometry/filtered_on_map"/> <!--"pf/pose/odom"-->
+
+    <node pkg="variable_speed_pure_pursuit" type="variable_speed_mobile_robot_pure_pursuit.py" name="variable_speed_trajectory_follower">
+        <param name="odom_topic" value="$(arg odom_topic)"/>
+        <param name="trajectory_topic" value="/trajectory/current"/>
+        <param name="check_drive_topic" value="/waypoint_navi/check_drive"/>
+        <param name="drive_topic" value="/high_level/twist_cmd_mux/input/nav_5"/>
+        <param name="max_reacquire" value="1.0"/>
+        <param name="controller_freq" value="10.0"/>
+        <param name="wrap" value="0"/>
+    </node>
+
+    <node pkg="variable_speed_pure_pursuit" type="trajectory_with_speed_loader.py" name="trajectory_with_speed_loader">
+        <param name="min_speed" value="0.3"/>
+        <param name="max_speed" value="1.0"/>
+        <param name="max_acceleration" value="1.0"/>
+        <param name="max_decceleration" value="-1.0"/>
+        <param name="pub_topic" value="/trajectory/current"/>
+        <param name="sub_topic" value="/trajectory/new"/>
+    </node>
+</launch>

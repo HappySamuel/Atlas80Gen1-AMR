@@ -1,0 +1,7 @@
+image: psa_warehouse_combined_13Sep_2.pgm
+resolution: 0.050000
+origin: [-70.0, -60.0, 0.000000]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
+

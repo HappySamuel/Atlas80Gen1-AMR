@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<launch>
+    <!-- Launch Map -->
+    <node pkg="map_server" name="map_server" type="map_server" args="$(find atlas80)/maps/psa_warehouse_combined_28Jun.yaml"/>
+<!-- "$(find atlas80)/maps/psa_warehouse_combined_18may.yaml" -->
+<!-- "$(find atlas80)/maps/v3_fit_full_mandai_connection_8A.yaml" -->
+<!-- "$(find atlas80)/maps/new_psa_showcase_1.yaml" -->
+<!-- "$(find atlas80)/maps/psa_warehouse_combined_fakeslope.yaml" -->
+<!-- "$(find atlas80)/maps/psa_warehouse_combined_18may.yaml" -->
+
+    <!-- Launch Offline Trajectory Builder -->
+    <node pkg="pure_pursuit_navigation" type="trajectory_builder.py" name="Trajectory_builder" output="screen">
+        <param name="save_path" value="$(find pure_pursuit_navigation)/trajectories/"/>
+    </node>
+
+    <!-- Launch Builder Assistant -->
+    <node pkg="pure_pursuit_navigation" type="builder_assistant.py" name="Builder_Assistant">
+        <param name="points_file" value="$(find pure_pursuit_navigation)/trajectories/psa_points_collection.traj"/>
+<!--        <param name="points_file" value="$(find pure_pursuit_navigation)/trajectories/shado_testing/shado_points_collection.traj"/> -->
+<!--        <param name="points_file" value="$(find pure_pursuit_navigation)/trajectories/psa_warehouse_points_collection.traj"/> -->
+<!--        <param name="points_file" value="$(find pure_pursuit_navigation)/trajectories/psa_showcase_points_collection.traj"/>-->
+    </node>
+
+    <!-- Launch RVIZ for building trajectory -->
+    <node pkg="rviz" type="rviz" name="pf_rviz" args="-d $(find atlas80)/rviz/build_trajectory_cfg.rviz"/>
+
+<!-- 
+   Notes: (1) Using the "goal point" for assigning the waypoints.
+          (2) Use "Ctrl + C" to finish and save the defined trajectory.
+-->
+</launch>

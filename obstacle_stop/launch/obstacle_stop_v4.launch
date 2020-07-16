@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<launch>
+    <node pkg="obstacle_stop" type="obstacle_stop_v4.py" name="obstacle_stop_v4">
+        <param name="scan_topic" value="/lidars/scan_multi"/>
+        <param name="drive_topic" value="/low_level/twist_cmd_mux/input/safety"/>
+        <param name="obstacle_mode_topic" value="/obstacle_stop/mode"/>
+        <param name="inner_x_min" value="-0.3"/>
+        <param name="inner_x_max" value="0.5"/>
+        <param name="inner_y_min" value="-0.6"/>
+        <param name="inner_y_max" value="0.6"/>
+        <param name="outer_x_min" value="-0.7"/>
+        <param name="outer_x_max" value="1.0"/>
+        <param name="outer_y_min" value="-0.7"/>
+        <param name="outer_y_max" value="0.7"/>
+    </node>
+</launch>

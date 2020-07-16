@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<!--  o = original   |   a = alternative  -->
+<launch>
+    <!-- 36V Battery Monitoring -->
+    <node pkg="battery_monitoring" type="v36_battery_monitoring.py" name="v36_battery_monitoring">
+        <param name="voltage_topic" value="battery/voltage"/>
+        <param name="battery_topic" value="battery/percentage"/>
+        <param name="volt_36_100" value="41.0"/> <!-- o 41.0  a 40.5 -->
+        <param name="volt_36_95" value="40.35"/>
+        <param name="volt_36_90" value="39.7"/> <!-- o 39.7  a 39.5-->
+        <param name="volt_36_85" value="39.05"/>
+        <param name="volt_36_80" value="38.4"/> <!-- o 38.4  a 38.1 -->
+        <param name="volt_36_75" value="37.75"/>
+        <param name="volt_36_70" value="37.1"/> <!-- o 37.1  a 36.9 -->
+        <param name="volt_36_65" value="36.45"/>
+        <param name="volt_36_60" value="35.8"/> <!-- o 35.8  a 35.7 -->
+        <param name="volt_36_55" value="35.15"/>
+        <param name="volt_36_50" value="34.5"/> <!-- o 34.5  a 34.5-->
+        <param name="volt_36_45" value="33.85"/>
+        <param name="volt_36_40" value="33.2"/> <!-- o 33.2  a 33.3 -->
+        <param name="volt_36_35" value="32.55"/>
+        <param name="volt_36_30" value="31.9"/> <!-- o 31.9  a 32.1 -->
+        <param name="volt_36_25" value="31.25"/>
+        <param name="volt_36_20" value="30.6"/> <!-- o 30.6  a 30.9 -->
+        <param name="volt_36_15" value="29.95"/>
+        <param name="volt_36_10" value="29.3"/> <!-- o 29.3  a 29.7 -->
+        <param name="volt_36_5" value="28.65"/>
+        <param name="volt_36_0" value="28.0"/> <!-- o 28.0  a 28.5-->
+        <param name="volt_tolerance" value="-0.2"/> 
+        <!-- "+" <-> higher than actual    |    "-" <-> lower than actual -->
+    </node>
+
+    <!-- Battery GUI -->
+    <node pkg="battery_monitoring" type="battery_gui.py" name="battery_gui"/>
+</launch>

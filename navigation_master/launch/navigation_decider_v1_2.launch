@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<launch>
+    <node pkg="navigation_master" type="navigation_decider_v1_2.py" name="navigation_decider_v1_2" output="screen">
+        <param name="battery_topic" value="battery/percentage"/>
+        <param name="pose_topic" value="pf/pose/odom"/>
+        <param name="lifter_topic" value="lifter/status"/>
+        <param name="finish_turn_topic" value="turning_180/status"/>
+        <param name="finish_table_topic" value="table_navi/status"/>
+        <param name="moving_topic" value="low_level/twist_cmd_mux/output"/>
+        <param name="traj_topic" value="trajectory/current"/>
+        <param name="mission_topic" value="atlas80/mission"/>
+        <param name="path_topic" value="trajectory/new"/>
+        <param name="all_topic" value="atlas80/all_status"/>
+        <param name="suspend_topic" value="suspend/input/navi"/>
+        <param name="check_resume_topic" value="suspend/output"/>
+        <param name="init_turn_topic" value="turning_180/init"/>
+        <param name="init_table_topic" value="table_navi/init"/>
+        <param name="init_lift_topic" value="lifter/init"/>
+        <param name="check_drive_topic" value="waypoint_navi/check_drive"/>
+        <param name="path_directory" value="/home/atlas80-b/catkin_ws/src/pure_pursuit_navigation/trajectories"/>
+        <param name="wait_time" value="15"/> <!-- [sec] -->
+    </node>
+</launch>

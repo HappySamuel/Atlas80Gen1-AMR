@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+
+<launch>
+    <arg name="front_laser" default="true"/>
+    <arg name="rear_laser" default="true"/>
+    <arg name="imu" default="true"/>
+
+    <!-- Arduino_DUE and ROS Serial Communicator -->
+    <include file="$(find atlas80)/launch/due_serial.launch"/>
+
+    <!-- F710 Gamepad Teleop -->
+    <include file="$(find f710_teleop)/launch/f710_teleop.launch"/>
+
+    <!-- Remote Shutdown from Joystick -->
+    <node pkg="atlas80" type="remote_shutdown.py" name="remote_shutdown"/>
+
+    <!-- Remote Lifter Control from Joystick -->
+    <node pkg="atlas80" type="remote_lifter.py" name="remote_lifter"/>
+
+    <!-- Remote Ardudrive Killer from Joystick -->
+    <node pkg="atlas80" type="remote_ardudrive_killer.py" name="remote_ardudrive_killer"/>
+
+    <!-- Wifi TCP Teleop -->
+<!--    <include file="$(find wifi_tcp_teleop)/launch/wifi_tcp_teleop.launch"/> -->
+
+    <!-- High-Level & Low-Level Priority Controller -->
+    <include file="$(find twist_cmd_mux)/launch/AGV_mux.launch"/>
+
+    <!-- Throttle Interpolator -->
+    <include file="$(find throttle_interpolator)/launch/throttle_interpolator.launch"/>
+
+    <!-- Static TF (Front & Rear Lidars) -->
+    <include file="$(find atlas80)/launch/lidars_tf.launch">
+        <arg name="front_laser" value="$(arg front_laser)"/>
+        <arg name="rear_laser" value="$(arg rear_laser)"/>
+    </include>
+
+    <!-- Laser Scanners (Front & Rear) -->
+    <include file="$(find atlas80)/launch/laser_scanners.launch">
+        <arg name="front_laser" value="$(arg front_laser)"/>
+        <arg name="rear_laser" value="$(arg rear_laser)"/>
+    </include>
+
+    <!-- IMU Odometry and Static TF (IMU) -->
+    <group if="$(arg imu)">
+        <include file="$(find atlas80)/launch/imu_odometry.launch"/>
+    </group>
+
+    <!-- Low-Level Obstacle Detection & Safety Stop -->
+    <include file="$(find obstacle_stop)/launch/obstacle_stop_v8.launch"/>
+
+    <!-- Wheel Odometry -->
+    <include file="$(find wheel_odometry)/launch/wheel_odom.launch"/>
+
+    <!-- 36V Battery Monitoring -->
+    <include file="$(find battery_monitoring)/launch/v36_battery_monitoring.launch"/>
+
+    <!-- Suspend/Resume -->
+    <include file="$(find suspend_resume)/launch/suspend_resume.launch"/>
+
+    <!-- 180' Turning -->
+    <include file="$(find turning_180)/launch/turning_180_v2.launch"/>
+
+    <!-- 90' Turning -->
+    <include file="$(find turning_90)/launch/turning_90.launch"/>
+
+    <!-- Heading Turner -->
+    <include file="$(find heading_turner)/launch/heading_turner.launch"/>
+
+    <!-- Remote Restore -->
+    <node pkg="atlas80" type="remote_restore.py" name="remote_restore" output="screen"/> 
+</launch>

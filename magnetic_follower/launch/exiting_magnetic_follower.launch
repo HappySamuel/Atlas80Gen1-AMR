@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<launch>
+    <node pkg="magnetic_follower" type="exiting_magnetic_follower.py" name="exiting_magnetic_follower" output="screen">
+        <param name="init_mag_topic" value="exit_navi/init"/>
+        <param name="notify_topic" value="notify"/>
+        <param name="mag_topic" value="magnetic"/>
+        <param name="mag_drive_topic" value="high_level/twist_cmd_mux/input/nav_1"/>
+        <param name="relocalize_topic" value="initialpose"/>
+        <param name="finish_mag_topic" value="exit_navi/status"/>
+        <param name="pose_topic" value="/pf/pose/odom"/>
+        <param name="exit_pt_x" value="6.6"/>
+        <param name="exit_pt_y" value="8.7"/>
+        <param name="exit_pt_heading" value="0"/>
+    </node>
+</launch>

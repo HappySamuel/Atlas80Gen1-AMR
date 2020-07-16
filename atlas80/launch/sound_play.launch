@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<launch>
+    <node pkg="atlas80" type="sound_play.py" name="sound_play" output="screen">
+        <param name="joy_topic" value="joy"/>
+        <param name="sound_folder" value="/home/atlas80-b/catkin_ws/src/atlas80/sounds"/>
+        <param name="sound_file_1" value="dialog_extra3.ogg"/>
+        <param name="sound_file_2" value="bb83.ogg"/>
+        <param name="sound_file_3" value="dialog2.ogg"/>
+        <param name="sound_file_4" value="dialog3.ogg"/>
+        <param name="volume_1" value="1.0"/>    <!--  [min] 0.0 -> 1.0 [max]  -->
+        <param name="volume_2" value="0.3"/>
+        <param name="volume_3" value="1.0"/>
+        <param name="volume_4" value="1.0"/>
+    </node>
+</launch>

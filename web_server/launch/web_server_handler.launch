@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<launch>
+    <node pkg="web_server" type="web_server_handler.py" name="web_server_handler" output="screen">
+        <param name="all_topic" value="atlas80/all_status"/>
+        <param name="suspend_pub_topic" value="suspend/input/web"/>
+        <param name="suspend_sub_topic" value="suspend/output"/>
+        <param name="mission_topic" value="atlas80/mission"/>
+        <param name="magnetic_topic" value="magnetic"/>
+        <param name="notify_topic" value="notify"/>
+        <param name="id" value="Atlas80-B"/>
+    </node>
+</launch>

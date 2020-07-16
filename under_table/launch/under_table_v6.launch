@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<launch>
+    <arg name="pose_topic" default="odometry/filtered_on_map"/> <!--"pf/pose/odom"-->
+
+    <!-- Table Finder & Path Generator-->
+    <node pkg="under_table" type="table_filtering_v6.py" name="table_filtering_v6" output="screen">
+        <param name="init_table_topic" value="table_navi/init"/>
+        <param name="pose_topic" value="$(arg pose_topic)"/>
+        <param name="scan_topic" value="lidars/scan_multi"/>
+        <param name="route_topic" value="trajectory/table"/>
+        <param name="viz_points_topic" value="table/viz/pathpoint"/>
+        <param name="viz_table_topic" value="table/viz/table"/>
+        <param name="drive_topic" value="high_level/twist_cmd_mux/input/nav_0"/>
+        <param name="finish_table_topic" value="table_navi/status"/>
+        <param name="x_min" value="-0.3"/>          <!-- [m] -->
+        <param name="x_max" value="2.5"/>           <!-- [m] -->
+        <param name="y_min" value="-0.7"/>          <!-- [m] -->
+        <param name="y_max" value="0.7"/>           <!-- [m] -->
+        <param name="table_width" value="0.4"/>     <!-- [m] -->
+        <param name="table_length" value="0.8"/>    <!-- [m] -->
+        <param name="table_diagonal" value="0.9"/>  <!-- [m] -->
+        <param name="table_tolerance" value="0.1"/> <!-- [m] -->
+        <param name="route_trim_x" value="-0.01"/>  <!-- [m] relative to map -->
+        <param name="route_trim_y" value="0.0"/>    <!-- [m] relative to map -->
+    </node>
+
+    <!-- Under Table Navigator -->
+    <node pkg="under_table" type="table_navi_v4.py" name="table_navi_v4">
+        <param name="trajectory_topic" value="trajectory/table"/>
+        <param name="odom_topic" value="$(arg pose_topic)"/>
+        <param name="drive_topic" value="high_level/twist_cmd_mux/input/nav_3"/>
+        <param name="init_table_topic" value="table_navi/init"/>
+        <param name="lookahead" value="0.7"/>
+        <param name="max_reacquire" value="1.0"/>
+        <param name="controller_freq" value="10.0"/> <!-- 20 / 10 -->
+        <param name="wrap" value="0"/>
+        <param name="KV" value="0.025"/>
+        <!-- 0.0125 / 0.02 / 0.025 / 0.029 -->
+        <param name="KW" value="0.04"/>
+        <!-- 0.02 / 0.04 / 0.04 / 0.041 -->
+    </node>
+</launch>

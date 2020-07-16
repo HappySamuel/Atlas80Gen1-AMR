@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<launch>
+    <node pkg="pure_pursuit_navigation" type="mobile_robot_pure_pursuit.py" name="Trajectory_Follower">
+        <param name="odom_topic" value="/odometry/filtered_on_map"/> <!-- original /pf/pose/odom -->
+        <param name="trajectory_topic" value="/trajectory/current"/>
+        <param name="check_drive_topic" value="/waypoint_navi/check_drive"/>
+        <param name="lookahead" value="1.0"/>
+        <param name="max_reacquire" value="1.0"/>
+        <param name="controller_freq" value="10.0"/>
+<!--        <param name="speed" value="$(arg speed)"/> -->
+        <param name="wheelbase" value="0.29"/>
+        <param name="wrap" value="0"/>
+        <param name="drive_topic" value="/high_level/twist_cmd_mux/input/nav_5"/>
+        <param name="KV" value="0.055"/>  <!-- speed 0.55 [m/s] -->
+        <param name="KW" value="0.06"/>
+    </node>
+
+<!-- good KV=0.055 KW=0.048 -->
+<!-- good KV=0.055 KW=0.049 -->
+
+    <node pkg="pure_pursuit_navigation" type="trajectory_caller.py" name="trajectory_caller"/>
+</launch>

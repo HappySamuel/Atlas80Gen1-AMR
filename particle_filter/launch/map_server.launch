@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<launch>
+<!-- "$(find atlas80)/maps/v3_fit_full_mandai_connection_8A.yaml" -->
+<!-- "$(find atlas80)/maps/ImBIG_factory_fit.yaml" -->
+<!-- "$(find atlas80)/maps/new_psa_showcase_1.yaml" -->
+<!-- "$(find atlas80)/maps/psa_warehouse_combined_fakeslope.yaml" -->
+<!-- "$(find atlas80)/maps/new_psa_showcase_1.yaml" -->
+<!-- "$(find atlas80)/maps/psa_warehouse_combined_18may.yaml" -->
+<!-- "$(find atlas80)/maps/psa_warehouse_combined_19may.yaml" -->
+<!-- "$(find atlas80)/maps/psa_warehouse_combined_21may.yaml" -->
+<!-- "$(find atlas80)/maps/psa_warehouse_combined_8Jun.yaml" -->
+<!-- "$(find atlas80)/maps/psa_warehouse_combined_13Jun.yaml" -->
+<!-- "$(find atlas80)/maps/psa_warehouse_combined_14Jun.yaml" -->
+<!-- "$(find atlas80)/maps/psa_warehouse_combined_20Jun.yaml" -->
+<!-- "$(find atlas80)/maps/psa_warehouse_combined_25Jun.yaml" -->
+<!-- "$(find atlas80)/maps/psa_warehouse_combined_12Jul.yaml" -->
+<!-- "$(find atlas80)/maps/psa_warehouse_combined_13Aug.yaml" -->
+<!-- "$(find atlas80)/maps/psa_warehouse_combined_3Sep.yaml" -->
+<!-- "$(find atlas80)/maps/psa_warehouse_combined_12Sep.yaml" -->
+<!-- "$(find atlas80)/maps/psa_warehouse_combined_13Sep_2.yaml" -->
+
+    <arg name="map" default="$(find atlas80)/maps/psa_warehouse_combined_18Sep.yaml"/>
+    <node pkg="map_server" name="map_server" type="map_server" args="$(arg map)" />
+</launch>

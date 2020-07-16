@@ -1,0 +1,10 @@
+<library path="lib/libtwist_cmd_mux_nodelet">
+  <class name="twist_cmd_mux/TwistCmdMuxNodelet"
+         type="twist_cmd_mux::TwistCmdMuxNodelet"
+         base_class_type="nodelet::Nodelet">
+    <description>
+      Implementation for the twist command multiplexer as a nodelet.
+    </description>
+  </class>
+</library>
+

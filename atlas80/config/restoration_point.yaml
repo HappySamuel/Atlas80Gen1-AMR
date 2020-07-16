@@ -1,0 +1,14 @@
+relocalize_pt_1:
+  x: 8.2
+  y: 7.5
+  heading: -90.0
+
+relocalize_pt_2:
+  x: 19.5
+  y: -25.0
+  heading: -90.0
+
+relocalize_pt_3:
+  x: 19.5
+  y: -25.0
+  heading: 90.0

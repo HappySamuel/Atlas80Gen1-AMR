@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<launch>
+    <!-- 24V Battery Monitoring -->
+    <node pkg="battery_monitoring" type="v24_battery_monitoring.py" name="v24_battery_monitoring">
+        <param name="voltage_topic" value="battery/voltage"/>
+        <param name="battery_topic" value="battery/percentage"/>
+        <param name="volt_24_100" value="28.6"/> <!-- original 28.6 -->
+        <param name="volt_24_90" value="27.7"/> <!-- original 27.7 -->
+        <param name="volt_24_80" value="26.8"/> <!-- original 26.8 -->
+        <param name="volt_24_70" value="25.9"/> <!-- original 25.9 -->
+        <param name="volt_24_60" value="25.0"/> <!-- original 25.0 -->
+        <param name="volt_24_50" value="24.1"/> <!-- original 24.1 -->
+        <param name="volt_24_40" value="23.2"/> <!-- original 23.2 -->
+        <param name="volt_24_30" value="22.3"/> <!-- original 22.3 -->
+        <param name="volt_24_20" value="21.4"/> <!-- original 21.4 -->
+        <param name="volt_24_10" value="20.5"/> <!-- original 20.5 -->
+        <param name="volt_24_0" value="19.6"/> <!-- original 19.6 -->
+        <param name="volt_tolerance" value="0.8"/>
+    </node>
+
+    <!-- Battery GUI -->
+    <node pkg="battery_monitoring" type="battery_gui.py" name="battery_gui"/>
+</launch>

@@ -1,0 +1,92 @@
+joy_node:
+  dev: /dev/input/js0
+  deadzone: 0.01
+  autorepeat_rate: 20
+  coalesce_interval: 0.01
+
+teleop:
+  # Default mode - Stop for safety
+  default:
+    type: topic
+    is_default: true
+    message_type: geometry_msgs/Twist
+    topic_name: low_level/twist_cmd_mux/input/teleop
+    message_value:
+      -
+        target: linear.x
+        value: 0.0
+      -
+        target: angular.z
+        value: 0.0
+
+  # Enable Human control by holding Left Bumper
+  human_control:
+    type: topic
+    message_type: geometry_msgs/Twist
+    topic_name: low_level/twist_cmd_mux/input/teleop
+    deadman_buttons: [4]
+    axis_mappings:
+      -
+        axis: 1
+        target: linear.x
+        scale: 0.5           # 5.8 <---> 1 [m/s]
+        offset: 0.0
+      -
+        axis: 3
+        target: angular.z
+        scale: 0.5           # 3.436 <---> 1 [rad/s]
+        offset: 0.0
+
+  # Enable Sound control by holding colourful key
+#  sound_control:
+#    type: topic
+#    message_type: geometry_msgs/Twist
+#    topic_name: low_level/twist_cmd_mux/input/teleop
+#    deadman_buttons: [0] # <---> green A
+#    message_value:
+#      -
+#        target: linear.y
+#        value: 1.0
+
+#  start_control:
+#    type: topic
+#    message_type: geometry_msgs/Twist
+#    topic_name: low_level/twist_cmd_mux/input/teleop
+#    deadman_buttons: [1] # <---> red B
+#    message_value:
+#      -
+#        target: linear.z
+#        value: 1.0
+
+#  charge_control:
+#    type: topic
+#    message_type: geometry_msgs/Twist
+#    topic_name: low_level/twist_cmd_mux/input/teleop
+#    deadman_buttons: [2] # <---> blue x
+#    message_value:
+#      -
+#        target: angular.x
+#        value: 1.0
+
+#  any_control:
+#    type: topic
+#    message_type: geometry_msgs/Twist
+#    topic_name: low_level/twist_cmd_mux/input/teleop
+#    deadman_buttons: [3] # <---> yellow y
+#    message_value:
+#      -
+#        target: angular.y
+#        value: 1.0
+
+  # Enable autonomous control by pressing right bumper
+  # This switch causes the joy_teleop to stop sending messages to input/teleop
+  # And send messages to /dev/null (an unused ROS topic)
+  autonomous_control:
+    type: topic
+    message_type: std_msgs/Int8
+    topic_name: /dev/null
+    deadman_buttons: [5]
+    message_value:
+      -
+        target: data
+        value: 0

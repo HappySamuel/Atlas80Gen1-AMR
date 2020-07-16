@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<launch>
+    <node pkg="turning_180" type="turning_180.py" name="turning_180">
+        <param name="init_180_turn_topic" value="turning_180/init"/>
+        <param name="drive_topic" value="high_level/twist_cmd_mux/input/nav_2"/>
+        <param name="odom_topic" value="motor/odom"/>
+        <param name="finish_180_turn_topic" value="turning_180/status"/>
+    </node>
+</launch>

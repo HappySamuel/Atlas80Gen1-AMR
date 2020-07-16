@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<launch>
+    <arg name="spin" default="0"/>
+    <arg name="trajectory" default="$(find pure_pursuit_navigation)/trajectories/shado_try_2.traj"/>
+
+    <node pkg="pure_pursuit_navigation" type="trajectory_loader.py" name="Trajectory_loader">
+        <param name="trajectory" value="$(arg trajectory)"/>
+        <param name="publish" value="1"/>
+        <param name="topic" value="/trajectory/current"/>
+        <param name="spin" value="$(arg spin)"/>
+    </node>
+</launch>

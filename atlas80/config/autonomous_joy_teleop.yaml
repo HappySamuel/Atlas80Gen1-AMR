@@ -1,0 +1,36 @@
+joy_node:
+  dev: /dev/input/js0
+  deadzone: 0.01
+  autorepeat_rate: 20
+  coalesce_interval: 0.01
+
+teleop:
+  # Default mode - autonomous control by sending messages to /dev/null (an unused ROS topic)
+  default:
+    type: topic
+    is_default: true
+    message_type: std_msgs/Int8
+    topic_name: /dev/null
+    message_value:
+      -
+        target: data
+        value: 0
+
+  # Enable Human control by holding Left Bumper
+  human_control:
+    type: topic
+    message_type: geometry_msgs/Twist
+    topic_name: low_level/twist_cmd_mux/input/teleop
+    deadman_buttons: [4]
+    axis_mappings:
+      -
+        axis: 1
+        target: linear.x
+        scale: 1.0           # 1.0 <---> 1 [m/s]
+        offset: 0.0
+      -
+        axis: 3
+        target: angular.z
+        scale: 1.0           # 0.505 <---> 1 [rad/s]
+        offset: 0.0
+

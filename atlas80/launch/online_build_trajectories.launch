@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<launch>
+    <!-- Launch Map -->
+    <node pkg="map_server" name="map_server" type="map_server" args="$(find atlas80)/maps/new_psa_showcase_1.yaml" />
+
+    <!-- Launch Offline Trajectory Builder -->
+    <node pkg="pure_pursuit_navigation" type="trajectory_builder.py" name="Trajectory_builder">
+        <param name="save_path" value="$(find pure_pursuit_navigation)/trajectories/"/>
+    </node>
+
+    <!-- Launch RVIZ for building trajectory -->
+    <node pkg="rviz" type="rviz" name="pf_rviz" args="-d $(find atlas80)/rviz/build_trajectory_cfg.rviz"/>
+
+    <!-- Particle Filter Localization -->
+    <include file="$(find particle_filter)/launch/build_trajectory_localize.launch"/>
+
+<!-- 
+   Notes: (1) Using the "goal point" for assigning the waypoints.
+          (2) Use "Ctrl + C" to finish and save the defined trajectory.
+-->
+</launch>

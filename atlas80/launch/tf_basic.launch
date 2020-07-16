@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+
+<launch>
+	<arg name="front_laser" default="true"/>
+	<arg name="rear_laser" default="true"/>
+    <arg name="imu" default="true"/>
+
+	<!-- Arduino_DUE and ROS Serial Communicator -->
+	<include file="$(find atlas80)/launch/due_serial.launch"/>
+
+	<!-- F710 Gamepad Teleop -->
+	<include file="$(find f710_teleop)/launch/f710_teleop.launch"/>
+
+	<!-- Remote Shutdown from Joystick -->
+	<node pkg="atlas80" type="remote_shutdown.py" name="remote_shutdown"/>
+
+	<!-- Remote Lifter Control from Joystick -->
+	<node pkg="atlas80" type="remote_lifter.py" name="remote_lifter"/>
+
+    <!-- Remote Ardudrive Killer from Joystick -->
+    <node pkg="atlas80" type="remote_ardudrive_killer.py" name="remote_ardudrive_killer"/>
+
+	<!-- Wifi TCP Teleop -->
+<!--	<include file="$(find wifi_tcp_teleop)/launch/wifi_tcp_teleop.launch"/> -->
+
+	<!-- High-Level & Low-Level Priority Controller -->
+	<include file="$(find twist_cmd_mux)/launch/AGV_mux.launch"/>
+
+	<!-- Throttle Interpolator -->
+	<include file="$(find throttle_interpolator)/launch/throttle_interpolator.launch"/>
+
+	<!-- Static TF (Front & Rear Lidars) -->
+	<include file="$(find atlas80)/launch/lidars_tf.launch">
+		<arg name="front_laser" value="$(arg front_laser)"/>
+		<arg name="rear_laser" value="$(arg rear_laser)"/>
+	</include>
+
+	<!-- Laser Scanners (Front & Rear) -->
+	<include file="$(find atlas80)/launch/laser_scanners.launch">
+		<arg name="front_laser" value="$(arg front_laser)"/>
+		<arg name="rear_laser" value="$(arg rear_laser)"/>
+	</include>
+
+    <!-- IMU Driver -->
+    <node pkg="imu_3dm_gx3" type="imu_3dm_gx3" name="imu">
+        <param name="port" value="/dev/microstrain-imu"/>
+        <param name="frame_id" value="imu"/>
+    </node>
+
+    <!-- IMU Odometry -->
+    <node pkg="dead_reckoning" type="tf_odom_imu" name="encoder_imu"/>
+
+    <!-- IMU tf Broadcaster-->
+    <group ns="Coordinate_TF">
+        <node pkg="atlas80" type="static_transform_pub_param" name="base_link_to_imu">
+            <param name="parent_frame_id" value="base_link"/>
+            <param name="child_frame_id" value="imu"/>
+            <param name="x" value="-0.05"/>
+            <param name="y" value="0.13"/>
+            <param name="z" value="0.39"/>
+            <param name="yaw" value="0"/>
+            <param name="pitch" value="0"/>
+            <param name="roll" value="0"/>
+        </node>
+    </group>
+
+	<!-- Low-Level Obstacle Detection & Safety Stop -->
+	<include file="$(find obstacle_stop)/launch/obstacle_stop_v7.launch"/>
+
+	<!-- Wheel Odometry -->
+	<include file="$(find wheel_odometry)/launch/tf_wheel_odom.launch"/>
+
+	<!-- 36V Battery Monitoring -->
+	<include file="$(find battery_monitoring)/launch/v36_battery_monitoring.launch"/>
+
+	<!-- Suspend/Resume -->
+	<include file="$(find suspend_resume)/launch/suspend_resume.launch"/>
+
+	<!-- 180' Turning -->
+	<include file="$(find turning_180)/launch/turning_180.launch"/>
+
+	<!-- 90' Turning -->
+	<include file="$(find turning_90)/launch/turning_90.launch"/>
+
+	<!-- Heading Turner -->
+	<include file="$(find heading_turner)/launch/heading_turner.launch"/>
+</launch>

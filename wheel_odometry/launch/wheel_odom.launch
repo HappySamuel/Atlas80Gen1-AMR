@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<launch>
+    <node pkg="wheel_odometry" type="wheel_odom_encoder_tick.py" name="wheel_odom">
+        <param name="encoder_topic" value="motor/encoder"/>
+        <param name="wheel_odom_topic" value="motor/odom"/>
+        <param name="tick_to_distance_gain" value="3385"/>   <!-- 3385 [ticks/m] -->
+        <param name="dist_between_wheels" value="0.48"/>      <!-- 0.475 [m] -->
+<!-- 0.475 / 0.48 -->
+        <!-- diameter of driving wheel = 0.165m -->
+    </node>
+</launch>

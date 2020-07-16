@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<launch>
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find atlas80)/rviz/log_replay.rviz"/>
+
+    <node pkg="rosbag" type="play" name="player" args="--clock -r 5 /home/atlas80-b/Desktop/bagfiles/20181122-mission_2018-11-29-15-21-55.bag" output="screen"/>
+</launch>
+
+<!-- 2018922-mission_2018-11-02-16-19-11.bag -->
+<!-- 2018923-mission_2018-11-02-16-30-41.bag -->
+<!-- 2018684-mission_2018-09-05-14-34-09.bag -->
+<!-- 2018688-mission_2018-09-05-18-09-36.bag -->
+
+<!-- /imu/odom stop rotating -->
+<!-- 2018689-mission_2018-09-05-19-03-10.bag -->

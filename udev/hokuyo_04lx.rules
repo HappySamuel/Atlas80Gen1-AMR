@@ -1,0 +1,4 @@
+# Set the udev rule, make the device_port be fixed by Hokuyo Lidar URG-04LX
+#
+SUBSYSTEMS=="usb", KERNEL=="tty*", ACTION=="add", ATTRS{idVendor}=="15d1", ATTRS{idProduct}=="0000", MODE="666", GROUP="dialout", SYMLINK+="hokuyo_04lx"
+

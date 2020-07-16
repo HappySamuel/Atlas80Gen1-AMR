@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<launch>
+    <node pkg="turning_90" type="turning_90.py" name="turning_90">
+        <param name="init_90_turn_topic" value="turning_90/init"/>
+        <param name="drive_topic" value="high_level/twist_cmd_mux/input/nav_2"/>
+        <param name="odom_topic" value="imu/odom"/>
+        <param name="finish_90_turn_topic" value="turning_90/status"/>
+    </node>
+</launch>

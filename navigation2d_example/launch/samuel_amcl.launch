@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<launch>
+
+    <node pkg="map_server" type="map_server" name="map_server" args="$(find particle_filter)/maps/dining_space.yaml"/>
+
+    <node pkg="amcl" type="amcl" name="amcl" output="screen">
+	<param name="scan" value="/scan"/>
+	<param name="odom_frame_id" value="odom"/>
+	<param name="base_frame_id" value="base_link"/>
+	<param name="global_frame_id" value="map"/>
+
+	<param name="min_particles" value="100"/>
+	<param name="max_particles" value="1000"/>
+	<param name="transform_tolerance" value="0.01"/>
+
+	<param name="recovery_alpha_slow" value="0.005"/>
+	<param name="recovery_alpha_fast" value="0.1"/>
+
+	<param name="update_min_d" value="0.2"/>
+	<param name="update_min_a" value="0.2"/>
+
+	<param name="m" value="diff"/>
+	<param name="odom_alpha1" value="0.4"/>
+	<param name="odom_alpha2" value="0.4"/>
+
+	<param name="initial_cov_xx" value="0.1"/>
+	<param name="initial_cov_yy" value="0.1"/>
+	<param name="initial_cov_aa" value="0.5"/>
+
+	<param name="save_pose_rate" value="0.2"/>
+
+	<param name="tf_broadcast" value="true"/>
+    </node>
+
+</launch>

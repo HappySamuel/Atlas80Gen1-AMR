@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+
+<launch>
+    <node pkg="self_charging" type="auto_charging.py" name="auto_charging" output="screen">
+        <param name="init_charging_topic" value="self_charging/init"/>
+        <param name="battery_topic" value="battery/percentage"/>
+        <param name="pose_topic" value="pf/pose/odom"/>
+        <param name="drive_topic" value="high_level/twist_cmd_mux/input/nav_4"/>
+        <param name="mag_drive_topic" value="high_level/twist_cmd_mux/input/nav_1"/>
+        <param name="contactor_topic" value="self_charging/contactor"/>
+        <param name="stop_charging_topic" value="self_charging/pause"/>
+        <param name="finish_charging_topic" value="self_charging/status"/>
+        <param name="suspend_topic" value="suspend/input/navi"/>
+        <param name="notify_topic" value="notify"/>
+        <param name="magnetic_topic" value="magnetic"/>
+        <param name="charge_stop_voltage" value="80"/>  
+        <param name="charge_stop_offset" value="5"/>
+
+        <!-- <param name="stop_pt_x" value="-7.5"/> -->
+        <!-- <param name="stop_pt_y" value="17.05"/> -->
+        <param name="stop_pt_x" value="-6.4"/>
+        <param name="stop_pt_y" value="17.05"/>
+        <param name="check_pt_x" value="-4.5"/>
+        <param name="check_pt_y" value="17.05"/>
+        <param name="finish_pt_x" value="-4.0"/>
+        <param name="finish_pt_y" value="19.5"/>
+        <param name="heading_min" value="-160"/>
+        <param name="heading_max" value="160"/>
+        <param name="charging_route" value="/home/atlas80-b/catkin_ws/src/pure_pursuit_navigation/trajectories/shado_testing/shado_charging.traj"/>
+    </node>
+
+    <node pkg="self_charging" type="charging_navi.py" name="charging_navi">
+        <param name="init_charging_topic" value="self_charging/init"/>
+        <param name="pose_topic" value="pf/pose/odom"/>
+        <param name="drive_topic" value="high_level/twist_cmd_mux/input/nav_3"/>
+        <param name="stop_charging_topic" value="self_charging/pause"/>
+        <param name="lookahead" value="0.8"/>
+        <param name="max_reacquire" value="1.0"/>
+        <param name="KV" value="0.03"/>
+        <param name="KW" value="0.03"/>
+    </node>
+</launch>

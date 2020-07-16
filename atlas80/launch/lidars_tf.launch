@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<launch>
+    <arg name="front_laser" default="true"/>
+    <arg name="rear_laser" default="false"/>
+
+    <!-- Static TF -->
+    <group if="$(arg front_laser)" ns="Coordinate_TF">
+        <node pkg="atlas80" type="static_transform_pub_param" name="base_link_to_front_lidar">
+            <param name="parent_frame_id" value="base_link"/>
+            <param name="child_frame_id" value="front_lidar"/>
+            <param name="x" value="0.495"/> <!--  0.208 , 0.485 , 0.495 , 0.57-->
+            <param name="y" value="0"/>
+            <param name="z" value="0"/>
+            <param name="yaw" value="0"/>
+            <param name="pitch" value="0"/>
+            <param name="roll" value="0"/>
+        </node>
+    </group>
+
+    <group if="$(arg rear_laser)" ns="Coordinate_TF">
+        <node pkg="atlas80" type="static_transform_pub_param" name="base_link_to_rear_lidar">
+            <param name="parent_frame_id" value="base_link"/>
+            <param name="child_frame_id" value="rear_lidar"/>
+            <param name="x" value="-0.205"/> <!--  -0.45 , -0.205 , -0.215 , -0.23-->
+            <param name="y" value="0"/>
+            <param name="z" value="0"/>
+            <param name="yaw" value="3.01"/> <!-- ydlidar=3.01 or 3.05  ,  r2000=3.14159 -->
+            <param name="pitch" value="0"/>
+            <param name="roll" value="0"/>
+        </node>
+    </group>
+</launch>

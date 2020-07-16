@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<launch>
+    <node pkg="throttle_interpolator" type="throttle_interpolator.py" name="throttle_interpolator">
+        <param name="motor_in_topic" value="low_level/twist_cmd_mux/output"/>
+        <param name="motor_out_topic" value="cmd_vel"/>
+        <param name="max_acceleration" value="1.0"/>
+        <param name="max_speed" value="1.0"/>
+        <param name="min_speed" value="-0.3"/>
+        <param name="throttle_smoother_rate" value="30.0"/> <!-- 50 -->
+        <param name="max_turning_speed" value="2.0"/>
+        <param name="max_turning" value="1.0"/>
+        <param name="min_turning" value="-1.0"/>
+    </node>
+
+</launch>

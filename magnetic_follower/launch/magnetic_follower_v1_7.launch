@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+
+<launch>
+    <node pkg="magnetic_follower" type="magnetic_follower_v1_7.py" name="magnetic_follower_v1_7" output="screen">
+        <param name="init_mag_topic" value="mag_navi/init"/>
+        <param name="notify_topic" value="notify"/>
+        <param name="mag_topic" value="magnetic"/>
+        <param name="drive_topic" value="high_level/twist_cmd_mux/input/nav_1"/>
+        <param name="init_90_turn_topic" value="turning_90/init"/>
+        <param name="finsih_90_turn_topic" value="turning_90/status"/>
+        <param name="relocalize_topic" value="initialpose"/>
+        <param name="finish_mag_topic" value="mag_navi/status"/>
+        <param name="pose_topic" value="/pf/pose/odom"/>
+        <param name="check_drive_topic" value="/waypoint_navi/check_drive"/>
+        <param name="pt_1_x" value="19.5"/>
+        <param name="pt_1_y" value="-32.5"/> <!-- -31.5 -->
+        <param name="pt_1_heading" value="-90"/>
+        <param name="pt_2_x" value="31.7"/>
+        <param name="pt_2_y" value="-31.5"/>
+        <param name="pt_2_heading" value="-90"/>
+        <param name="pt_3_x" value="37.5"/>
+        <param name="pt_3_y" value="-31.5"/>
+        <param name="pt_3_heading" value="-90"/>
+        <param name="pt_4_x" value="49.5"/>
+        <param name="pt_4_y" value="-31.5"/>
+        <param name="pt_4_heading" value="-90"/>
+        <param name="pt_5_x" value="55.3"/>
+        <param name="pt_5_y" value="-31.5"/>
+        <param name="pt_5_heading" value="-90"/>
+        <param name="out_pt_x" value="19.5"/>
+        <param name="out_pt_y" value="-25.2"/> <!-- -28.5 -->
+        <param name="out_pt_heading" value="90"/>
+        <param name="exit_pt_x" value="5.7"/>
+        <param name="exit_pt_y" value="8.6"/>
+        <param name="exit_pt_heading" value="0"/>
+        <param name="bay_1_x" value="18.0"/>
+        <param name="bay_1_y" value="-22.0"/>
+        <param name="bay_2_x" value="18.0"/>
+        <param name="bay_2_y" value="-27.0"/>
+        <param name="bay_3_x" value="21.0"/>
+        <param name="bay_3_y" value="-27.0"/>
+        <param name="bay_4_x" value="21.0"/>
+        <param name="bay_4_y" value="-22.0"/>
+    </node>
+</launch>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<launch>
+    <node pkg="obstacle_stop" type="obstacle_stop_v8.py" name="obstacle_stop_v8" output="screen">
+        <param name="scan_topic" value="/lidars/scan_multi"/>
+        <param name="drive_topic" value="/low_level/twist_cmd_mux/input/safety"/>
+        <param name="speed_topic" value="/low_level/twist_cmd_mux/input/navigation"/>
+        <param name="obstacle_mode_topic" value="/obstacle_stop/mode"/>
+        <param name="viz_outer_region_topic" value="/obstacle_stop/viz/detection_region/outer"/>
+        <param name="viz_inner_region_topic" value="/obstacle_stop/viz/detection_region/inner"/>
+        <param name="file_location" value="/home/atlas80-b/catkin_ws/src/obstacle_stop/config"/>
+        <param name="speed_limit" value="0.7"/>
+    </node>
+</launch>

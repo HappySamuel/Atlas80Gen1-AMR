@@ -1,0 +1,27 @@
+local_costmap:
+    #---- car footprint (meter) -----
+    footprint: [[-0.5, -0.3], [-0.5, 0.3], [0.5, 0.3], [0.5, -0.3]]
+    footprint_padding: 0.01
+    transform_tolerance: 1.0
+    update_frequency: 4.0 # the map refresh rate for path planning
+    publish_frequency: 4.0 # the refresh rate for showing in RVIZ
+
+    global_frame: /odom
+    robot_base_frame: /base_link
+    static_map: false
+    rolling_window: true
+    width: 4.0
+    height: 4.0
+    resolution: 0.1
+
+    plugins:            
+        - {name: sensor,    type: "costmap_2d::ObstacleLayer"}
+        - {name: inflation, type: "costmap_2d::InflationLayer"}
+
+    sensor:
+        observation_sources: laser_scan_sensor
+        laser_scan_sensor: {sensor_frame: laser, data_type: LaserScan, topic: scan, marking: true, clearing: true}
+
+    inflation:
+        inflation_radius: 2.5
+        cost_scaling_factor: 8.0

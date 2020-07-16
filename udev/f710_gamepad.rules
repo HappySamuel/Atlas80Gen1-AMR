@@ -1,0 +1,6 @@
+# Set the udev rule, make the device_port be fixed for F710 Gamepad
+
+SUBSYSTEMS=="usb", KERNEL=="js*", ACTION=="add", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c21f", MODE="666", GROUP="dialout", SYMLINK+="f710_gamepad"
+
+SUBSYSTEMS=="usb", KERNEL=="js*", ACTION=="add", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c219", MODE="666", GROUP="dialout", SYMLINK+="f710_gamepad"
+
